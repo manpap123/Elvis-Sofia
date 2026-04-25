@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <title>Προσκλητήριο Γάμου</title>
+
+  <!-- Fonts (calligraphy + classic serif + clean sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #ece7df;          /* outer background */
+      --paper: #fbf7f1;       /* paper */
+      --ink: #2a2622;         /* text */
+      --muted: rgba(42,38,34,.65);
+
+      --gold: #b08a6a;        /* gold lines */
+      --gold2: rgba(176,138,106,.55);
+      --gold3: rgba(176,138,106,.28);
+
+      --shadow: 0 28px 80px rgba(0,0,0,.22);
+
+      --script: "Great Vibes", "Brush Script MT", "Segoe Script", cursive;
+      --serif: "Cormorant Garamond", "Georgia", "Times New Roman", serif;
+      --sans: "Inter", "Arial", "Helvetica", sans-serif;
+
+      --max: 980px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height:100%; }
+    body{
+      margin:0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--serif);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* outer texture (paper-ish) */
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      pointer-events:none;
+      background:
+        radial-gradient(1200px 700px at 10% -15%, rgba(0,0,0,.08), transparent 60%),
+        radial-gradient(1000px 700px at 90% 0%, rgba(0,0,0,.06), transparent 60%),
+        radial-gradient(900px 650px at 50% 120%, rgba(0,0,0,.05), transparent 62%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 9px);
+      opacity: .55;
+    }
+
+    .wrap{
+      position: relative;
+      min-height: 100%;
+      display:flex;
+      justify-content:center;
+      padding: 34px 14px;
+    }
+
+    .card{
+      width: min(var(--max), 100%);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px; /* almost square like paper */
+    }
+
+    /* outer gold border */
+    .card::before{
+      content:"";
+      position:absolute;
+      inset: 18px;
+      border: 2px solid var(--gold2);
+      pointer-events:none;
+    }
+    /* inner hairline border */
+    .card::after{
+      content:"";
+      position:absolute;
+      inset: 30px;
+      border: 1px solid var(--gold3);
+      pointer-events:none;
+    }
+
+    /* subtle paper grain inside card */
+    .grain{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(800px 420px at 50% 10%, rgba(0,0,0,.06), transparent 60%),
+        radial-gradient(900px 520px at 40% 120%, rgba(0,0,0,.05), transparent 65%),
+        repeating-linear-gradient(90deg, rgba(0,0,0,.010) 0 2px, transparent 2px 7px);
+      opacity:.28;
+    }
+
+    /* floral line art (top-left) */
+    .floral{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:.42;
+      background-repeat:no-repeat;
+      background-size: 560px auto;
+      background-position: -70px -55px;
+      background-image: url("data:image/svg+xml;charset=utf-8,\
+      <svg xmlns='http://www.w3.org/2000/svg' width='900' height='600' viewBox='0 0 900 600'>\
+        <g fill='none' stroke='%23b08a6a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' opacity='0.9'>\
+          <path d='M60 240c85-95 190-105 280-35 60 45 135 75 245 58 90-14 165-55 250-12'/>\
+          <path d='M135 185c24 40 16 80-12 108'/>\
+          <path d='M190 155c35 55 22 110-26 150'/>\
+          <path d='M275 168c-22 34-16 70 12 104'/>\
+          <path d='M345 205c40 12 80 6 115-24'/>\
+          <path d='M440 188c30 36 30 72 6 108'/>\
+          <path d='M95 275c50 12 82 42 100 92'/>\
+          <path d='M172 276c25 18 38 42 38 74'/>\
+          <path d='M248 252c22 10 38 28 45 52'/>\
+          <path d='M480 230c36-20 66-22 100-6'/>\
+          <path d='M575 238c28 22 40 46 40 82'/>\
+        </g>\
+      </svg>");
+    }
+
+    .content{
+      position: relative;
+      z-index: 2;
+      padding: 54px 22px 52px;
+      text-align:center;
+    }
+
+    /* header monogram */
+    .monogram{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin: 0 auto 14px;
+      width: 86px;
+      height: 86px;
+      border-radius: 999px;
+      border: 2px solid var(--gold2);
+      position: relative;
+      background: rgba(251,247,241,.65);
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+    .monogram::after{
+      content:"";
+      position:absolute;
+      inset: 8px;
+      border-radius: 999px;
+      border: 1px solid var(--gold3);
+    }
+    .mono-text{
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 28px;
+      color: rgba(42,38,34,.85);
+      letter-spacing: .02em;
+    }
+
+    /* small ornament line left-right */
+    .mini-line{
+      margin: 10px auto 0;
+      width: min(520px, 88%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap: 12px;
+      color: var(--gold);
+      opacity: .9;
+      user-select:none;
+    }
+    .mini-line::before,
+    .mini-line::after{
+      content:"";
+      height: 1px;
+      flex:1;
+      background: linear-gradient(90deg, transparent, var(--gold2), transparent);
+    }
+    .mini-line svg{ display:block; }
+
+    h1{
+      margin: 10px 0 8px;
+      font-family: var(--script);
+      font-weight: 400; /* not bold */
+      font-size: clamp(56px, 6.8vw, 92px);
+      line-height: 1.02;
+      color: rgba(42,38,34,.92);
+    }
+
+    .date{
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      letter-spacing: .12em;
+      color: rgba(42,38,34,.70);
+    }
+
+    /* section divider with little star */
+    .divider{
+      margin: 18px auto 18px;
+      width: min(640px, 90%);
+      display:flex;
+      align-items:center;
+      gap: 16px;
+      justify-content:center;
+      color: var(--gold);
+      opacity: .95;
+    }
+    .divider::before,
+    .divider::after{
+      content:"";
+      height: 1px;
+      flex:1;
+      background: linear-gradient(90deg, transparent, var(--gold2), transparent);
+    }
+    .divider .star{
+      width: 18px; height: 18px;
+    }
+
+    .intro{
+      max-width: 72ch;
+      margin: 0 auto;
+      font-size: 1.22rem;
+      line-height: 1.95;
+      color: rgba(42,38,34,.78);
+    }
+
+    .title{
+      margin: 0 0 10px;
+      font-family: var(--serif);
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(42,38,34,.78);
+      font-size: 1.05rem;
+    }
+
+    .lines{
+      margin: 0 auto;
+      max-width: 640px;
+      font-size: 1.25rem;
+      line-height: 2.05;
+      color: rgba(42,38,34,.86);
+    }
+
+    .soft{
+      margin-top: 6px;
+      font-size: 1.08rem;
+      font-style: italic;
+      color: rgba(42,38,34,.62);
+      line-height: 1.8;
+    }
+
+    /* Map frame like screenshot */
+    .map-frame{
+      width: min(760px, 92%);
+      margin: 14px auto 0;
+      border: 2px solid var(--gold3);
+      border-radius: 14px;
+      overflow:hidden;
+      background: rgba(0,0,0,.02);
+      position: relative;
+    }
+    .map-embed{
+      width:100%;
+      height: 240px;
+      border:0;
+      display:block;
+      filter: saturate(.92) contrast(1.02);
+    }
+
+    .map-button{
+      position:absolute;
+      left:50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      background: rgba(251,247,241,.92);
+      border: 1px solid rgba(42,38,34,.20);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-family: var(--sans);
+      font-size: .95rem;
+      color: rgba(42,38,34,.82);
+      text-decoration:none;
+      box-shadow: 0 10px 25px rgba(0,0,0,.14);
+      backdrop-filter: blur(6px);
+    }
+    .pin{
+      width: 16px; height:16px; opacity:.85;
+    }
+
+    /* RSVP (same logic, styled to match) */
+    .rsvp-note{
+      margin: 0 auto;
+      max-width: 66ch;
+      font-size: 1.08rem;
+      line-height: 1.85;
+      color: rgba(42,38,34,.70);
+    }
+
+    .field{
+      margin: 12px auto 0;
+      width: min(520px, 92%);
+      text-align:left;
+    }
+    label{
+      display:block;
+      font-family: var(--sans);
+      font-size: .86rem;
+      letter-spacing: .06em;
+      color: rgba(42,38,34,.60);
+      margin: 0 0 6px;
+    }
+    input[type="text"], select{
+      width: 100%;
+      padding: 12px 12px;
+      border: 1px solid rgba(42,38,34,.18);
+      border-radius: 12px;
+      background: rgba(251,247,241,.92);
+      outline:none;
+      font-size: 1rem;
+      color: rgba(42,38,34,.90);
+      font-family: var(--sans);
+    }
+    input::placeholder{ color: rgba(42,38,34,.45); }
+    select:invalid{ color: rgba(42,38,34,.45); }
+
+    .actions{
+      width: min(520px, 92%);
+      margin: 14px auto 0;
+      display:flex;
+      gap: 10px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    button{
+      appearance:none;
+      border: 1px solid rgba(42,38,34,.20);
+      background: transparent;
+      color: rgba(42,38,34,.86);
+      padding: 12px 16px;
+      border-radius: 999px;
+      cursor:pointer;
+      transition: transform .06s ease, background .22s ease, opacity .2s ease;
+      font-size: 1rem;
+      font-family: var(--sans);
+      min-width: 210px;
+    }
+    button:hover{ background: rgba(42,38,34,.06); }
+    button:active{ transform: translateY(1px); }
+    button[disabled]{ opacity:.55; cursor:not-allowed; }
+
+    .message{
+      width: min(560px, 92%);
+      margin: 14px auto 0;
+      padding: 12px 14px;
+      border-top: 1px solid rgba(176,138,106,.35);
+      color: rgba(42,38,34,.82);
+      line-height: 1.9;
+      font-family: var(--sans);
+      display:none;
+    }
+
+    footer{
+      margin-top: 26px;
+      font-size: 1.18rem;
+      color: rgba(42,38,34,.72);
+      font-style: italic;
+    }
+
+    /* responsive padding */
+    @media (min-width: 860px){
+      .content{ padding: 62px 46px 58px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="grain"></div>
+      <div class="floral"></div>
+
+      <div class="content">
+
+        <div class="monogram" aria-label="Monogram">
+          <div class="mono-text">E·S</div>
+        </div>
+
+        <div class="mini-line" aria-hidden="true">
+          <span></span>
+          <svg width="26" height="10" viewBox="0 0 26 10" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 5h10M25 5H15" stroke="#b08a6a" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M13 1l1.2 2.6L17 5l-2.8 1.4L13 9l-1.2-2.6L9 5l2.8-1.4L13 1z" fill="#b08a6a"/>
+          </svg>
+          <span></span>
+        </div>
+
+        <h1>Elvis &amp; Sofia</h1>
+        <p class="date">10 / 07 / 2026 · 20:00</p>
+
+        <div class="divider" aria-hidden="true">
+          <span></span>
+          <svg class="star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#b08a6a" d="M12 2l1.6 5.2L19 9l-5.4 1.8L12 16l-1.6-5.2L5 9l5.4-1.8L12 2z"/>
+          </svg>
+          <span></span>
+        </div>
+
+        <p class="intro">
+          Με ιδιαίτερη χαρά σας προσκαλούμε να μοιραστείτε μαζί μας
+          την πιο όμορφη στιγμή της ζωής μας.
+        </p>
+
+        <div class="divider" aria-hidden="true">
+          <span></span>
+          <svg class="star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#b08a6a" d="M12 2l1.6 5.2L19 9l-5.4 1.8L12 16l-1.6-5.2L5 9l5.4-1.8L12 2z"/>
+          </svg>
+          <span></span>
+        </div>
+
+        <section>
+          <div class="title">Οι Οικογένειες</div>
+          <div class="lines">
+            <div>Πατέρας Νύφης · Μητέρα Νύφης</div>
+            <div>Πατέρας Γαμπρού · Μητέρα Γαμπρού</div>
+            <div class="soft">με τιμή σας προσκαλούν στον γάμο των παιδιών τους</div>
+          </div>
+        </section>
+
+        <div class="divider" aria-hidden="true">
+          <span></span>
+          <svg class="star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#b08a6a" d="M12 2l1.6 5.2L19 9l-5.4 1.8L12 16l-1.6-5.2L5 9l5.4-1.8L12 2z"/>
+          </svg>
+          <span></span>
+        </div>
+
+        <section>
+          <div class="title">Κουμπάροι</div>
+          <div class="lines">
+            <div>Σταματίνα Φλεριανού · Δημήτρης Ikarai</div>
+          </div>
+        </section>
+
+        <div class="divider" aria-hidden="true">
+          <span></span>
+          <svg class="star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#b08a6a" d="M12 2l1.6 5.2L19 9l-5.4 1.8L12 16l-1.6-5.2L5 9l5.4-1.8L12 2z"/>
+          </svg>
+          <span></span>
+        </div>
+
+        <section>
+          <div class="title">Ναός &amp; Δεξίωση</div>
+          <div class="lines" style="font-size:1.18rem;">
+            Το μυστήριο του γάμου και η δεξίωση πραγματοποιούνται στον ίδιο χώρο.
+          </div>
+
+          <div class="map-frame" aria-label="Χάρτης τοποθεσίας">
+            <iframe
+              class="map-embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3150.4717348971476!2d23.93603307535365!3d37.84925120786716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1921327ad8a83%3A0x20bedc3465dd8911!2zzqDOn86bzqXOp86pzqHOn86jIM6fzp3Olc6ZzqHOqc6d!5e0!3m2!1sel!2sgr!4v1769954802108!5m2!1sel!2sgr"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Χάρτης"
+            ></iframe>
+
+            <a class="map-button" href="https://maps.app.goo.gl/mxWEGeXatXpWLC759" target="_blank" rel="noopener">
+              <svg class="pin" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#6b4f3e" d="M12 2c-3.9 0-7 3.1-7 7 0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/>
+              </svg>
+              Προβολή τοποθεσίας στον Χάρτη
+            </a>
+          </div>
+        </section>
+
+        <div class="divider" aria-hidden="true">
+          <span></span>
+          <svg class="star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#b08a6a" d="M12 2l1.6 5.2L19 9l-5.4 1.8L12 16l-1.6-5.2L5 9l5.4-1.8L12 2z"/>
+          </svg>
+          <span></span>
+        </div>
+
+        <section>
+          <div class="title">Επιβεβαίωση Παρουσίας</div>
+          <p class="rsvp-note">Παρακαλούμε ενημερώστε μας αν θα παρευρεθείτε.</p>
+
+          <div class="field">
+            <label for="name">Ονοματεπώνυμο</label>
+            <input type="text" id="name" placeholder="Π.χ. Γιώργος Παπαδόπουλος" autocomplete="name" />
+          </div>
+
+          <div class="field">
+            <label for="guests">Πόσα άτομα;</label>
+            <select id="guests" required>
+              <option value="" disabled selected hidden>Επιλέξτε αριθμό</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+
+          <div class="actions">
+            <button id="btnYes" onclick="sendAnswer('Ναι')">Θα παρευρεθούμε</button>
+            <button id="btnNo" onclick="sendAnswer('Όχι')">Δεν θα μπορέσουμε</button>
+          </div>
+
+          <div class="message" id="message"></div>
+        </section>
+
+        <footer>Με αγάπη, Elvis &amp; Sofia</footer>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbybtoiDeMffqrGW156TX2lzTclqni_j2ozIzufdX2FCSMPYJ58u6YJa_o7ar-EQNmOk/exec';
+
+    function lockButtons(locked) {
+      document.querySelectorAll('button').forEach(btn => btn.disabled = locked);
+    }
+
+    function sendAnswer(answer) {
+      lockButtons(true);
+
+      const guests = document.getElementById('guests').value;
+      const name = document.getElementById('name').value.trim();
+      const messageEl = document.getElementById('message');
+
+      const showMsg = (html) => {
+        messageEl.style.display = 'block';
+        messageEl.innerHTML = html;
+      };
+
+      if (name === '') {
+        showMsg('Παρακαλώ γράψτε το ονοματεπώνυμό σας.');
+        lockButtons(false);
+        return;
+      }
+      if (answer.includes('Ναι') && guests === '') {
+        showMsg('Παρακαλώ επίλεξε πόσα άτομα θα έρθετε.');
+        lockButtons(false);
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('answer', answer);
+      formData.append('guests', guests);
+
+      fetch(scriptURL, { method: 'POST', body: formData })
+        .then(r => r.json())
+        .then(() => {
+          if (answer.includes('Ναι')) {
+            showMsg(`
+              <strong>Σας ευχαριστούμε πολύ!</strong><br>
+              Η παρουσία σας θα μας δώσει μεγάλη χαρά.<br>
+              Ανυπομονούμε να σας δούμε. ✦
+            `);
+          } else {
+            showMsg(`
+              <strong>Σας ευχαριστούμε για την απάντησή σας.</strong><br>
+              Θα σας έχουμε στην καρδιά μας εκείνη τη μέρα.
+            `);
+          }
+
+          document.getElementById('name').style.display = 'none';
+          document.getElementById('guests').style.display = 'none';
+          document.getElementById('btnYes').style.display = 'none';
+          document.getElementById('btnNo').style.display = 'none';
+        })
+        .catch(err => {
+          console.error(err);
+          showMsg('Υπήρξε πρόβλημα, δοκίμασε ξανά.');
+          lockButtons(false);
+        });
+    }
+  </script>
+</body>
+</html>
+
